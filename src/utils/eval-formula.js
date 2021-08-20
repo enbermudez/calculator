@@ -14,6 +14,13 @@ export default (str) => {
 
   const sanitazedFormula = formula.replace(/[^-()\d/*+.]/g, '');
 
-  // eslint-disable-next-line no-eval
-  return eval(sanitazedFormula);
+  try {
+    // eslint-disable-next-line no-eval
+    const result = eval(sanitazedFormula);
+    return result;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Wrong formula provided', e);
+    return 'Error';
+  }
 };
